@@ -41,10 +41,10 @@ public class MediaTTSManager implements WhyTTS {
         mSpeech = new TextToSpeech(mContext, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
-               // mSpeech.setLanguage(Locale.ENGLISH);
+                // mSpeech.setLanguage(Locale.ENGLISH);
             }
         });
-}
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public static WhyTTS getInstance(Context context) {
@@ -103,16 +103,27 @@ public class MediaTTSManager implements WhyTTS {
         player.start();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void setSpeechRate(float newRate) {
         //6.0+可以设置
-        //player.setPlaybackParams(player.getPlaybackParams().setSpeed(？？));
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            player.setPlaybackParams(player.getPlaybackParams().setSpeed(newRate));
+        } else {
+            Log.e(TAG, "setSpeechRate: 版本过低，接口不可用");
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void setSpeechPitch(float newPitch) {
-      //6.0+可以设置
-      // player.setPlaybackParams(player.getPlaybackParams().setPitch(？？));
+        //6.0+可以设置
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            player.setPlaybackParams(player.getPlaybackParams().setPitch(newPitch));
+        } else {
+            Log.e(TAG, "setSpeechPitch: 版本过低，接口不可用");
+        }
+
     }
 
     /**
