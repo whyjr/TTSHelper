@@ -21,7 +21,7 @@ allprojects {
     }
 }
 ```
-In the module build.gradle file,you should add the folloeing dependency:
+In the module build.gradle file,you should add the following dependency:
 ```
  implementation 'com.github.whyjr:TTSHelper:-SNAPSHOT'
 ```
